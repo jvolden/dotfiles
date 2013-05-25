@@ -1,1 +1,0 @@
-/home/jon/dotfiles/profile
