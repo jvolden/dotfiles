@@ -13,6 +13,7 @@ set magic
 set ai
 set si
 set mouse=a
+set noswapfile
 
 "" Remap escape to jj. Much quicker! 
 inoremap jj <Esc>
@@ -20,7 +21,7 @@ inoremap jj <Esc>
 "" Turn on status line by default.
 set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'solarized',
+    \ 'colorscheme': 'solarized_dark',
     \ }
 
 "" Turns off default mode text.
@@ -40,3 +41,5 @@ filetype plugin indent on
 
 nmap t o<ESC>k
 nmap T O<ESC>j
+
+set cursorline
