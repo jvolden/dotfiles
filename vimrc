@@ -1,5 +1,5 @@
 "" Pretty colors.
-syntax on
+syntax enable
 set nocompatible
 set softtabstop=4
 set expandtab
@@ -14,6 +14,7 @@ set ai
 set si
 set mouse=a
 set noswapfile
+set background=dark
 
 "" Remap escape to jj. Much quicker! 
 inoremap jj <Esc>
@@ -22,6 +23,22 @@ inoremap jj <Esc>
 set laststatus=2
 let g:lightline = {
     \ 'colorscheme': 'solarized_dark',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component': {
+    \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+    \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+    \ },
+    \ 'component_visible_condition': {
+    \   'readonly': '(&filetype!="help"&& &readonly)',
+    \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+    \ },
+    \ 'separator': { 'left': '⮀', 'right': '⮂' },
+    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
     \ }
 
 "" Turns off default mode text.
@@ -43,3 +60,5 @@ nmap t o<ESC>k
 nmap T O<ESC>j
 
 set cursorline
+colorscheme solarized
+set colorcolumn=81
