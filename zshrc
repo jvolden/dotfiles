@@ -10,7 +10,7 @@ bindkey -v
 zstyle :compinstall filename '/home/jon/.zshrc'
 
 autoload -Uz compinit
-compinit
+compinit -u
 # End of lines added by compinstall
 autoload -U promptinit
 promptinit
