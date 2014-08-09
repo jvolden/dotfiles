@@ -1,3 +1,5 @@
+[core]
+	autocrlf = false
 [user]
-	name = jon
+	name = Jon
 	email = volden.jon@gmail.com
