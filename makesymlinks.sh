@@ -16,26 +16,26 @@ files="profile bashrc vimrc gitconfig zshrc dir_colors vim"
 
 ########## Move files and link new ones.
 
-# create .old in homedir
+# Create .old in homedir
 echo "Running symlinks on $os"
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
 echo "...done"
 
-# change to the dotfiles directory
+# Change to the dotfiles directory
 echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
+# Move any existing dotfiles in homedir to .old directory, then create symlinks 
 for file in $files; do
     if [ -a $file ]
         then
-            echo "Moving $file from ~ to $olddir"
+            echo "Moving $file from ~/ to $olddir"
             mv ~/.$file $olddir
         else
             echo "$file does not exist. Not moving anything."
-        fi
+    fi
     # Git doesn't like symlinks on Windows/Cygwin. Make it a hard link if so.
     if [ $os == "Cygwin" -a $file == "gitconfig" ]
         then
@@ -44,5 +44,5 @@ for file in $files; do
         else
             echo "Creating symlink to $file in home directory."
             ln -s $dir/$file ~/.$file
-        fi
+    fi
 done
