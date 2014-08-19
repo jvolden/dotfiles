@@ -35,11 +35,6 @@ for file in $files; do
         else
             echo "$file does not exist. Not moving anything."
     fi
-    # Git doesn't like symlinks on Windows/Cygwin. Make it a hard link.
-    if [ $os == "Cygwin" -a $file == "gitconfig" ]; then
-        echo "Creating HARDLINK to $file in home directory."
-        ln $dir/$file ~/.$file
-    fi
     # Only create symlink for mintty if we are in Cywin.
     if [ $os == "Cygwin" -a $file == "mintyrc" ]; then
         echo "Creating symlink to $file in home directory."
@@ -49,5 +44,4 @@ for file in $files; do
         echo "Creating symlink to $file in home directory."
         ln -s $dir/$file ~/.$file
     fi
-
 done
