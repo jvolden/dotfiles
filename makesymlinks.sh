@@ -45,3 +45,7 @@ for file in $files; do
         ln -s $dir/$file ~/.$file
     fi
 done
+
+echo "After new shell installs, run the following commands."
+echo "> chsh -s \$(which zsh)"
+echo "> cd ~/dotfiles && git submodule init && git submodule update"
