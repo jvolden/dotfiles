@@ -1,5 +1,6 @@
 [core]
 	autocrlf = false
+	editor = vim
 [user]
 	name = Jon
 	email = volden.jon@gmail.com
