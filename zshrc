@@ -6,11 +6,11 @@ unsetopt beep
 bindkey -v
 
 zstyle :compinstall filename '/home/jon/.zshrc'
-autoload -Uz compinit
-compinit -Cu
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+#autoload -Uz compinit
+#compinit -Cu
+#zstyle ':completion:*' menu select
+#zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+#zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
 eval `dircolors ~/.dir_colors`
 
@@ -40,4 +40,5 @@ setopt prompt_subst
 #
 #PROMPT='%F{5}[%F{2}%n%F{5}@%F{2}%m%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
 
-source ~/dotfiles/agnoster.zsh-theme
+source ~/dotfiles/completion.zsh
+source ~/dotfiles/prompt.zsh
