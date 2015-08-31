@@ -1,4 +1,3 @@
-"" Pretty colors.
 syntax enable
 set nocompatible
 set softtabstop=4
@@ -15,6 +14,7 @@ set si
 set mouse=a
 set noswapfile
 set background=dark
+set scrolloff=999
 
 "" Remap escape to jj. Much quicker! 
 inoremap jj <Esc>
