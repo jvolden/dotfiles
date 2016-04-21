@@ -4,6 +4,8 @@ SAVEHIST=1000
 setopt appendhistory autocd extendedglob nomatch notify globdots
 unsetopt beep
 bindkey -v
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 zstyle :compinstall filename '~/.zshrc'
 #autoload -Uz compinit
