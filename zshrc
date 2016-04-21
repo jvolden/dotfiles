@@ -5,7 +5,7 @@ setopt appendhistory autocd extendedglob nomatch notify globdots
 unsetopt beep
 bindkey -v
 
-zstyle :compinstall filename '/home/jon/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 #autoload -Uz compinit
 #compinit -Cu
 #zstyle ':completion:*' menu select
