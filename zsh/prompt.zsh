@@ -134,9 +134,6 @@ prompt_agnoster_main() {
 prompt_agnoster_precmd() {
   vcs_info
   PROMPT='%{%f%b%k%}$(prompt_agnoster_main) '
-  if [[ -n $VIRTUAL_ENV ]]; then
-    RPROMPT="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%}"
-  fi
 }
 
 prompt_agnoster_setup() {
