@@ -60,4 +60,5 @@ setopt prompt_subst
 #PROMPT='%F{5}[%F{2}%n%F{5}@%F{2}%m%F{5}] %F{3}%3~ ${vcs_info_msg_0_} %f%# '
 
 source ~/dotfiles/zsh/completion.zsh
+source ~/dotfiles/zsh/promptvi.zsh
 source ~/dotfiles/zsh/prompt.zsh
