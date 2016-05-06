@@ -37,6 +37,8 @@ CROSS="\u2718"
 LIGHTNING="\u26a1"
 GEAR="\u2699"
 
+source promptvi.zsh
+
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
 # rendering default background/foreground.
@@ -106,6 +108,10 @@ prompt_dir() {
   prompt_segment blue $PRIMARY_FG ' %~ '
 }
 
+prompt_vi() {
+  prompt_segment $PRIMARY_FG default ${vim_mode}
+}
+
 # Status:
 # - was there an error
 # - am I root
@@ -128,6 +134,7 @@ prompt_agnoster_main() {
   prompt_context
   prompt_dir
   prompt_git
+  prompt_vi
   prompt_end
 }
 

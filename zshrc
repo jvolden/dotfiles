@@ -4,6 +4,7 @@ SAVEHIST=1000
 setopt appendhistory autocd extendedglob nomatch notify globdots
 unsetopt beep
 bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
 bindkey "^[OA" history-beginning-search-backward
 bindkey "^[OB" history-beginning-search-forward
 bindkey "^[[A" history-beginning-search-backward
