@@ -15,12 +15,20 @@ set mouse=a
 set noswapfile
 set background=dark
 set scrolloff=999
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+call vundle#end()
 
 "" Remap escape to jj. Much quicker! 
 inoremap jj <Esc>
 
 "" Turn on status line by default.
 set laststatus=2
+"" let g:solarized_termcolor=256
 let g:lightline = {
             \ 'colorscheme': 'solarized_dark',
             \ 'active': {

@@ -20,3 +20,6 @@ BoldCyan=147,161,161
 White=238,232,213
 BoldWhite=253,246,227
 Font=DejaVu Sans Mono for Powerline
+Term=xterm-256color
+Printer=WF-3620 Series(Network)
+BellType=0
