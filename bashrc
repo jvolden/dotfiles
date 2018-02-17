@@ -161,11 +161,11 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 
 
 
-echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan}\
-- DISPLAY on ${BRed}$DISPLAY${NC}\n"
+#echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan}\
+#- DISPLAY on ${BRed}$DISPLAY${NC}\n"
 date
-if [ -x /usr/games/fortune ]; then
-    /usr/games/fortune -s     # Makes our day a bit more fun.... :-)
+if [ -x /usr/bin/fortune ]; then
+    /usr/bin/fortune -s     # Makes our day a bit more fun.... :-)
 fi
 
 function _exit()              # Function to run upon exit of shell.
@@ -888,13 +888,9 @@ _make()
     COMPREPLY=( $( awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ \
                                {split($1,A,/ /);for(i in A)print A[i]}' \
                                 $makef 2>/dev/null | eval $gcmd  ))
-
 }
 
 complete -F _make -X '+($*|*.[cho])' make gmake pmake
-
-
-
 
 _killall()
 {
@@ -915,9 +911,12 @@ _killall()
 
 complete -F _killall killall killps
 
-
-
 # Local Variables:
 # mode:shell-script
 # sh-shell:bash
 # End:
+
+# Launch Zsh
+if [ -t 1 ]; then
+    exec zsh
+fi

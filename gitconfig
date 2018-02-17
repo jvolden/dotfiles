@@ -2,7 +2,7 @@
 	autocrlf = false
 	editor = vim
 [user]
-	name = Jon
+	name = cameljon
 	email = volden.jon@gmail.com
 [push]
 	default = simple
