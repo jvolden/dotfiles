@@ -38,7 +38,7 @@ for file in $files; do
         printf "Backing up: ${red}%s${end}\n" "[.$file]"
         mv ~/.$file $olddir
     else
-        echo ".$file does not exist. Not moving anything."
+        printf "${red}%s${end} does not exist. Not moving anything.\n" "[.$file]"
     fi
 done
 
