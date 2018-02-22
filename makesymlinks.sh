@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles 
 # in ~/dotfiles
@@ -14,7 +13,7 @@ red=$'\e[1;31m'
 end=$'\e[0m'
 
 # List of files. Space seperated.
-files="tmux.conf minttyrc profile bashrc vimrc gitconfig zshrc dir_colors vim"
+files="minttyrc profile bashrc vimrc gitconfig zshrc dir_colors vim tmux.conf"
 
 # Pre-install
 printf "\nRunning symlinks script\n"
