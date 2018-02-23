@@ -102,3 +102,4 @@ nmap T O<ESC>j
 set cursorline
 colorscheme solarized
 set colorcolumn=81
+set updatetime=100
