@@ -30,3 +30,7 @@
 	path = vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
     ignore = dirty
+[submodule "vim/bundle/vim-clang-format"]
+    path = vim/bundle/vim-clang-format
+    url = https://github.com/rhysd/vim-clang-format
+    ignore = dirty
