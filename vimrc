@@ -21,6 +21,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'itchyny/lightline.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 
 "" Remap escape to jj. Much quicker! 
@@ -29,8 +35,9 @@ inoremap jj <Esc>
 "" Turn on status line by default.
 set laststatus=2
 "" let g:solarized_termcolor=256
+
 let g:lightline = {
-            \ 'colorscheme': 'solarized_dark',
+            \ 'colorscheme': 'solarized',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'fugitive', 'filename' ] ]
@@ -93,7 +100,8 @@ endif
 au BufWritePost .vimrc so ~/.vimrc
 
 "" Cause pathogen maker Pope said to.
-execute pathogen#infect()
+"" execute pathogen#infect()
+
 filetype plugin indent on
 
 nmap t o<ESC>k
