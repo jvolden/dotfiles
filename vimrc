@@ -23,10 +23,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'itchyny/lightline.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter.git'
 call vundle#end()
 
 "" Remap escape to jj. Much quicker! 
