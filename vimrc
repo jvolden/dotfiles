@@ -30,6 +30,7 @@ Plugin 'airblade/vim-gitgutter.git'
 call vundle#end()
 
 "" Remap escape to jj. Much quicker! 
+"" More!
 inoremap jj <Esc>
 
 "" Turn on status line by default.
@@ -95,12 +96,6 @@ set noshowmode
 if !has('gui_running')
     set t_Co=256
 endif
-
-"" Auto reload .vimrc when saved.
-au BufWritePost .vimrc so ~/.vimrc
-
-"" Cause pathogen maker Pope said to.
-"" execute pathogen#infect()
 
 filetype plugin indent on
 
