@@ -1,13 +1,25 @@
 #!/bin/bash
+PATH="/usr/bin:$PATH"
+args=()
+for arg in $1
+do
+  if [ "${arg:1:2}" = ':\' ]
+  then
+    args+=("$(cygpath -u "$arg")")
+  elif [[ ${arg:0:4} == :?:\\ ]]
+  then
+    args+=(":$($(cygpath -u "${arg:1}"))")
+  else
+    args+=("$arg")
+  fi
+done
 
-# Thanks to nickbudi!
-# https://gist.github.com/nickbudi/4b489f50086db805ea0f3864aa93a9f8
-
-# extract last argument (the file path)
-for last; do true; done
-
-# get all the initial command arguments
-all="${@:1:$(($#-1))}"
-
-# launch editor with windows path
-code $all $(cygpath -w $last)
+if [ "${args[0]}" = rev-parse ] && [ "${args[1]}" = "--show-toplevel" ]
+then
+  result="$(git "${args[@]}")"
+  s="$?"
+  cygpath -w "$result"
+  exit "$s"
+else
+  exec git "${args[@]}"
+fi
