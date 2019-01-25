@@ -82,7 +82,17 @@ for file in $files; do
     fi
 done
 
-# Post install
-printf "\nAfter new shell installs, run the following command.\n"
-printf "\$ ${red}cd ~/dotfiles && git submodule init && git submodule update${end}\n\n"
-
+# Post install/Vundle
+printf "\n"
+if [ -a ~/dotfiles/vim/bundle/Vundle.vim ]; then
+    printf "Vundle.vim folder already exists. Skipping Vundle install."
+else
+    printf "Install Vundle.vim? [y/n]: "
+    read vundleanswer
+    if [ $vundleanswer == y ]; then
+        git clone https://github.com/VundleVim/Vundle.vim ~/dotfiles/vim/bundle/Vundle.vim
+        printf "You must run vim and type :PluginInstall"
+    else
+        exit
+    fi
+fi
