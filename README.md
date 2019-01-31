@@ -10,7 +10,6 @@ Attempting to keep it simple while working with both \*nix and cygwin shells.
 ## First use:
     * Run these commands:
         ~~1. $ chsh -s $(which zsh)~~ (Globally set in bashrc.)
-        2. $ cd ~/dotfiles && git submodule init && git submodule update
 
 ## Required:
         On Windows, install DejaVuSansMono from ./fonts 

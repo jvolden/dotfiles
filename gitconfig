@@ -1,7 +1,10 @@
 [core]
 	autocrlf = false
+	editor = vim
 [user]
 	name = Jon Volden
 	email = volden.jon@gmail.com
 [push]
 	default = simple
+[merge]
+	conflictstyle = diff3
