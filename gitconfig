@@ -1,6 +1,5 @@
 [core]
 	autocrlf = false
-	editor = ~/dotfiles/cygpath-git-editor.sh
 [user]
 	name = Jon Volden
 	email = volden.jon@gmail.com
