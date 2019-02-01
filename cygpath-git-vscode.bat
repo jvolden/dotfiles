@@ -1,1 +1,0 @@
-@C:/cygwin/bin/bash.exe /home/volde/dotfiles/cygpath-git-editor.sh "%*"
