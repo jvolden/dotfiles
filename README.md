@@ -9,11 +9,11 @@ Attempting to keep it simple while working with both \*nix and cygwin shells.
 
 ## First use:
     * Run these commands:
-        ~~1. $ chsh -s $(which zsh)~~ (Globally set in bashrc.)
+        1. $ chsh -s $(which zsh) (Globally set in bashrc.)
 
 ## Required:
         On Windows, install DejaVuSansMono from ./fonts 
         or DejaVuSansMono from powerline/fonts.git
 
 ## TODO:
-    ~~* Add fonts to dotfiles?~~
+    * Add fonts to dotfiles?

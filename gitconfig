@@ -1,6 +1,7 @@
 [core]
-	autocrlf=false
+	autocrlf = false
 	editor = vim
+	fileMode = false
 [user]
 	name = Jon Volden
 	email = volden.jon@gmail.com
