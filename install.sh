@@ -1,7 +1,7 @@
 #!/bin/bash
-# .make.sh
-# This script creates symlinks from the home directory to any desired dotfiles 
-# in ~/dotfiles
+# install.sh
+# Installs the dotfiles and backs up old profile settings.
+# Also, installs Vundle.vim. A :PluginInstall is required from within Vim.
 
 # Variables
 dir=~/dotfiles      # dotfiles directory
@@ -73,7 +73,7 @@ done
 # Create symlinks
 printf "\n"
 for file in $files; do
-    if [ $os == "Cygwin" -a $file == "minttyrc" ]; then
+    if [ $os == "Cygwin" ] && ( [ $file == "minttyrc" ] || [ $file == "gitconfig" ] ); then
         printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Creating symlink:" ".$file"
         ln $dir/$file ~/.$file
     else
@@ -84,6 +84,7 @@ done
 
 # Post install/Vundle
 printf "\n"
+
 if [ -a ~/dotfiles/vim/bundle/Vundle.vim ]; then
     printf "Vundle.vim folder already exists. Skipping Vundle install."
 else
