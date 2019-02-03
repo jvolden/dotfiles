@@ -30,7 +30,7 @@ _(If you don't use cygwin, this can be deleted.)_
     * Lots of laggy horrible plugins turned on that I can't live without.
     * Git prompt
 
-__TLDR: Generally these will dotfiles will:__
+__TLDR: Generally these dotfiles will:__
 * Set term and vim themes to solarized. 
 * Adds a few status line submodules for zsh and vim.
 * ~~Adds~~ Provides DejaVuSansMono font. https://github.com/powerline/fonts  
@@ -38,10 +38,9 @@ __TLDR: Generally these will dotfiles will:__
 
 ## Install:
 
-Run these commands:
+Run install.sh
 
-  1. $ chsh -s $(which zsh) (Globally set in bashrc.)
-  2. Run install.sh
+To make zsh default shell: $ chsh -s $(which zsh)
 
 ## Required:
 
