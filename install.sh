@@ -30,19 +30,9 @@ files="minttyrc
        tmux.conf"
 
 # Pre-installation commands
-printf "\nRunning symlinks script\n"
+printf "\nRunning install.\n"
 printf "\n"
-if [ -a $olddir ]; then
-    printf "Backup directory already exists. Overwrite? [y/n]: "
-    read answer
-    if [ $answer == y ]; then
-        # Not safe. Another way?
-        rm -rf $olddir
-    else
-        exit
-    fi
-fi
-printf "\n"
+
 printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Detected environment:" "$os"
 printf "\n"
 total=0
@@ -56,28 +46,30 @@ printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Changing directory:" "${dir}"
 printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Creating backup folder:" "$olddir"
 mkdir -p $olddir
 
-# Change working directory
 cd $dir
 
-# Backup files
 printf "\n"
+printf "%-15s %14s %15s\n" "File" "Backup" "Install"
 for file in $files; do
-    if [ -a ~/.$file ]; then
-        printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Backing up:" ".$file"
+    #back up file
+    printf "${red}%-15s${end}" ".${file}"
+    if [ -a ~/.$file ] && cmp -s ~/.$file $file; then
+        printf "${red}%15s${end}" "Skipped"
+    elif [ -a ~/.$file ]; then
+        printf "${red}%15s${end}" "Done"
         mv ~/.$file $olddir
     else
-        printf "Skipping: ${red}%s${end} does not exist.\n" ".$file"
+        printf "${red}%15s${end}" "No File"
     fi
-done
 
-# Create symlinks
-printf "\n"
-for file in $files; do
-    if [ $os == "Cygwin" ] && ( [ $file == "minttyrc" ] || [ $file == "gitconfig" ] ); then
-        printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Creating symlink:" ".$file"
+    #install file
+    if [ -a ~/.$file ] && cmp -s ~/.$file $file; then
+        printf "${red}%16s${end}\n" "Skipped"
+    elif [ $os == "Cygwin" ] && ( [ $file == "minttyrc" ] || [ $file == "gitconfig" ] ); then
+        printf "${red}%16s${end}\n" "Done"
         ln $dir/$file ~/.$file
     else
-        printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Creating symlink:" ".$file"
+        printf "${red}%16s${end}\n" "Done"
         ln -s $dir/$file ~/.$file
     fi
 done
@@ -98,4 +90,4 @@ else
     fi
 fi
 
-printf "\n"
+printf "\n\n\n"
