@@ -1,93 +1,122 @@
 #!/bin/bash
 # install.sh
+#
 # Installs the dotfiles and backs up old profile settings.
+#
+# These dotfiles assumes vim, zsh, and git are installed.
 # Also, installs Vundle.vim. A :PluginInstall is required from within Vim.
+#
+# To add files or directories to the dotfile, simply copy them to the dotfiles
+# folder.
+#
+# $ cp <file> ~/dotfiles
+# $ cp <directory> ~/dotfiles
+#
+# On Windows, all links are symbolic links except gitconfig and minttyrc. 
+# Windows complains unless these are hard links.
 
 # Variables
-dir=~/dotfiles      # dotfiles directory
-olddir=~/.old       # old dotfiles backup directory
+dir=~/dotfiles
+current=`pwd -P`
+olddir=~/.old
 os=`uname -o`
-pad1=25
-pad2=20
-sepleft="["
-sepright="]"
-
-# Colors
-red=$'\e[1;31m'
+# Font formats
+udl=$'\e[4m'
+bld=$'\e[1m'
+red=$'\e[31m'
 end=$'\e[0m'
 
-# List of files.
-# Add any files. One per line.
-files="minttyrc
-       profile 
-       bashrc 
-       vimrc 
-       gitconfig 
-       zshrc 
-       dir_colors 
-       vim 
-       zsh
-       tmux.conf"
+# Pretty pretty
+header="%-25s %39s\n"
+lnheader="%-15s %7s %20s %20s\n"
+lnformat="%-15s %7s %20s %20s\n"
+divider=---------------------------------
+divider=$divider$divider$divider
 
 # Pre-installation commands
-printf "\nRunning install.\n"
-printf "\n"
+printf "\n\n${header}" "Running:" "${PWD}/${0##*/}"
+printf "${header}" "Detected OS:" "$os"
+if [ "${current}" != "${dir}" ]
+then
+    printf "%-s ${red}%s${end}\n" "Changing directory:" "${dir}"
+    cd $dir
+fi
+if [ ! -d $olddir ] 
+then
+    printf "%-s ${red}%s${end}\n" "Creating backup folder:" "$olddir"
+    mkdir -p $olddir
+fi
 
-printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Detected environment:" "$os"
-printf "\n"
-total=0
-for file in $files; do
-    printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Dotfiles:" "$file"
-    ((total++))
+# Build items array for installation.
+files=(* .[^.]*)
+# Items we don't want to symlink.
+remove=(README.md install.sh .gitignore .git)
+for item in "${remove[@]}"
+do
+    for file in "${!files[@]}"
+    do
+        if [[ $item = "${files[file]}" ]] 
+        then
+            #echo -e Removing "${files[file]}"
+            unset "files[file]"
+        fi
+    done
 done
-printf "%${pad1}s %${pad2}d\n" "Total files: " "$total"
-printf "\n"
-printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Changing directory:" "${dir}"
-printf "%-${pad1}s ${red}%${pad2}s${end}\n" "Creating backup folder:" "$olddir"
-mkdir -p $olddir
+printf "${header}" "Files found: " "${#files[@]}"
 
-cd $dir
+# Symlink file information
+printf "\n\n${header}" "Creating symlinks" "****"
+printf "${lnheader}" "Name" "Type" "Backup" "Install"
+printf "%65.65s\n" "${divider}"
 
-printf "\n"
-printf "%-15s %14s %15s\n" "File" "Backup" "Install"
-for file in $files; do
+# Process each item
+for file in ${files[@]}
+do
     #back up file
-    printf "${red}%-15s${end}" ".${file}"
-    if [ -a ~/.$file ] && cmp -s ~/.$file $file; then
-        printf "${red}%15s${end}" "Skipped"
-    elif [ -a ~/.$file ]; then
-        printf "${red}%15s${end}" "Done"
-        mv ~/.$file $olddir
+    if [ -a ~/.${file} ] && cmp -s ~/.${file} ${file}
+    then
+        backup="Same as new"
+    elif [ -a ~/.${file} ]
+    then
+        backup="Done"
+        mv ~/.${file} $olddir
     else
-        printf "${red}%15s${end}" "No File"
+        backup="No file"
     fi
 
     #install file
-    if [ -a ~/.$file ] && cmp -s ~/.$file $file; then
-        printf "${red}%16s${end}\n" "Skipped"
-    elif [ $os == "Cygwin" ] && ( [ $file == "minttyrc" ] || [ $file == "gitconfig" ] ); then
-        printf "${red}%16s${end}\n" "Done"
-        ln $dir/$file ~/.$file
+    if [ -a ~/.${file} ] && cmp -s ~/.${file} ${file}
+    then
+        install="Same as new"
+    elif [ $os == "Cygwin" ] && ( [ ${file} == "minttyrc" ] || [ ${file} == "gitconfig" ] ); then
+        install="Installed"
+        ln $dir/${file} ~/.${file}
     else
-        printf "${red}%16s${end}\n" "Done"
-        ln -s $dir/$file ~/.$file
+        install="Installed"
+        ln -s $dir/${file} ~/.${file}
     fi
+
+    #output
+    if [ -d ${file} ]
+    then
+        type="[Dir]"
+    else
+        type="[File]"
+    fi
+    printf "${lnformat}" ".${file}" "${type}" "${backup}" "${install}"
 done
 
 # Post install/Vundle
-printf "\n"
-
 if [ -a ~/dotfiles/vim/bundle/Vundle.vim ]; then
-    printf "Vundle.vim folder already exists. Skipping Vundle install."
+    printf "\n${header}\n" "Vundle.vim detected: " "Skipping"
 else
-    printf "Install Vundle.vim? [y/n]: "
+    printf "\nInstall Vundle.vim? [y/n]: "
     read vundleanswer
     if [ $vundleanswer == y ]; then
         git clone https://github.com/VundleVim/Vundle.vim ~/dotfiles/vim/bundle/Vundle.vim
-        printf "You must run vim and type :PluginInstall"
+        printf "\nYou must run vim and type :PluginInstall\n\n"
     else
         exit
     fi
 fi
-
-printf "\n\n\n"
+unset files remove
