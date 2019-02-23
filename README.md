@@ -22,6 +22,8 @@ _(If you don't use cygwin, this can be deleted.)_
     Plugin 'tpope/vim-sensible'
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter.git'
+    Plugin 'easymotion/vim-easymotion'
+    Plugin 'mattn/emmet-vim'
     ```
 
 8. zshrc/zsh folder: My current settings for zsh. 
