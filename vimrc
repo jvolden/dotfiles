@@ -136,5 +136,6 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 augroup vimrchooks
   au!
   autocmd bufwritepost .vimrc source ~/.vimrc
+  autocmd ButWritePost * GitGutter
 augroup END
 
