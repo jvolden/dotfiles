@@ -135,7 +135,7 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 "" Reload .vimrc when saved
 augroup vimrchooks
   au!
-  autocmd bufwritepost .vimrc source ~/.vimrc
-  autocmd ButWritePost * GitGutter
+  autocmd BufWritePost .vimrc source ~/.vimrc
+  autocmd BufWritePost * GitGutter
 augroup END
 
