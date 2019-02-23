@@ -1,23 +1,40 @@
 syntax enable
-set nocompatible
-set softtabstop=4
-set expandtab
-set shiftwidth=4
-set tabstop=4
+filetype plugin indent on
+
+set nocompatible    "" Set incompatible with vi
+set softtabstop=2   "" Treat tabs like n spaces
+set expandtab       "" Expand tabs into spaces
+set shiftwidth=2    "" Spaces that < and > shift
+set tabstop=2       "" Number of spaces for tabs
 set smarttab
-set number
+set number          "" Line numbers
+set relativenumber  "" Relative numbers
 set ignorecase
 set smartcase
 set magic
-set ai
-set si
-set mouse=a
+set autoindent      "" Keep previous line indent
+set smartindent     "" Indent blocks automaticly
+set mouse=a         "" Enable mouse all modes
 set noswapfile
 set background=dark
-set scrolloff=999
-" set textwidth=100
+set scrolloff=5
+set showcmd         "" Show commands as they are typed
 set colorcolumn=100
-filetype off
+set cursorline      "" Highlight current line
+set laststatus=2
+set updatetime=250  "" ms to wait before writes
+set noshowmode      "" Disable default mode state
+
+"" Set to 256 colors. (Fixes solarized terminal colors.)
+if !has('gui_running')
+    set t_Co=256
+endif
+
+"" Keybindings
+let mapleader = ","
+inoremap jj <Esc>
+nmap t o<ESC>k
+nmap T O<ESC>j
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -29,13 +46,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter.git'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'mattn/emmet-vim'
 call vundle#end()
 
-inoremap jj <Esc> " Remap jj to escape
-
-"" Turn on status line by default.
-set laststatus=2
-"" let g:solarized_termcolor=256
+colorscheme solarized
 
 let g:lightline = {
             \ 'colorscheme': 'solarized',
@@ -89,23 +104,6 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-"" Turns off default mode text.
-set noshowmode
-
-"" Set to 256 colors. (Fixes solarized terminal colors.)
-if !has('gui_running')
-    set t_Co=256
-endif
-
-filetype plugin indent on
-
-nmap t o<ESC>k
-nmap T O<ESC>j
-
-set cursorline
-colorscheme solarized
-set updatetime=100
-
 "" NERDTree Settings.
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -133,3 +131,10 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+"" Reload .vimrc when saved
+augroup vimrchooks
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
+
