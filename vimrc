@@ -48,6 +48,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter.git'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mattn/emmet-vim'
+Plugin 'Valloric/MatchTagAlways'
 call vundle#end()
 
 colorscheme solarized
