@@ -24,6 +24,11 @@ set cursorline      "" Highlight current line
 set laststatus=2
 set updatetime=250  "" ms to wait before writes
 set noshowmode      "" Disable default mode state
+set infercase
+set completeopt=longest,menuone
+set omnifunc=syntaxcomplete#Complete
+set completefunc=syntaxcomplete#Complete
+set complete=.,w,b,u,U,t,i,d
 
 "" Set to 256 colors. (Fixes solarized terminal colors.)
 if !has('gui_running')
@@ -140,3 +145,13 @@ augroup vimrchooks
   autocmd BufWritePost * GitGutter
 augroup END
 
+augroup omni_complete
+  " clear commands before resetting
+  autocmd!
+  " Enable omnicomplete for supported filetypes
+  autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
