@@ -54,6 +54,7 @@ Plugin 'airblade/vim-gitgutter.git'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mattn/emmet-vim'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'itchyny/calendar.vim'
 call vundle#end()
 
 colorscheme solarized
@@ -155,3 +156,6 @@ augroup omni_complete
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup END
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
