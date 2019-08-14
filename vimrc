@@ -54,7 +54,8 @@ Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 call plug#end()
 
-colorscheme solarized
+silent! colorscheme evening
+silent! colorscheme solarized
 
 let g:lightline = {
       \ 'colorscheme': 'solarized',

@@ -39,12 +39,9 @@
 #-------------------------------------------------------------
 # Source global definitions (if any)
 #-------------------------------------------------------------
-
-
 if [ -f /etc/bashrc ]; then
       . /etc/bashrc   # --> Read /etc/bashrc, if present.
 fi
-
 
 #--------------------------------------------------------------
 #  Automatic setting of $DISPLAY (if not set already).
@@ -97,7 +94,6 @@ set -o notify
 set -o noclobber
 set -o ignoreeof
 
-
 # Enable options:
 shopt -s cdspell
 shopt -s cdable_vars
@@ -113,7 +109,6 @@ shopt -s extglob       # Necessary for programmable completion.
 shopt -u mailwarn
 unset MAILCHECK        # Don't want my shell to warn me of incoming mail.
 
-
 #-------------------------------------------------------------
 # Greeting, motd etc. ...
 #-------------------------------------------------------------
@@ -122,7 +117,6 @@ unset MAILCHECK        # Don't want my shell to warn me of incoming mail.
 # Some colors might look different of some terminals.
 # For example, I see 'Bold Red' as 'orange' on my screen,
 # hence the 'Green' 'BRed' 'Red' sequence I often use in my prompt.
-
 
 # Normal Colors
 Black='\e[0;30m'        # Black
@@ -156,10 +150,7 @@ On_White='\e[47m'       # White
 
 NC="\e[m"               # Color Reset
 
-
 ALERT=${BWhite}${On_Red} # Bold White on red background
-
-
 
 #echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan}\
 #- DISPLAY on ${BRed}$DISPLAY${NC}\n"
@@ -209,7 +200,6 @@ trap _exit EXIT
 #    Command is added to the history file each time you hit enter,
 #    so it's available to all shells (using 'history -a').
 
-
 # Test connection type:
 if [ -n "${SSH_CONNECTION}" ]; then
     CNX=${Green}        # Connected on remote machine, via ssh (good).
@@ -227,8 +217,6 @@ elif [[ ${USER} != $(logname) ]]; then
 else
     SU=${BCyan}         # User is normal (well ... most of us are).
 fi
-
-
 
 NCPU=$(grep -c 'processor' /proc/cpuinfo)    # Number of CPUs
 SLOAD=$(( 100*${NCPU} ))        # Small load
@@ -292,7 +280,6 @@ function job_color()
 
 # Adds some text in the terminal frame (if applicable).
 
-
 # Now we construct the prompt.
 PROMPT_COMMAND="history -a"
 case ${TERM} in
@@ -315,14 +302,11 @@ case ${TERM} in
         ;;
 esac
 
-
-
 export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 export HISTIGNORE="&:bg:fg:ll:h"
 export HISTTIMEFORMAT="$(echo -e ${BCyan})[%d/%m %H:%M:%S]$(echo -e ${NC}) "
 export HISTCONTROL=ignoredups
 export HOSTFILE=$HOME/.hosts    # Put a list of remote hosts in ~/.hosts
-
 
 #============================================================
 #
@@ -353,7 +337,6 @@ alias ..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 
-
 alias du='du -kh'    # Makes a more readable output.
 alias df='df -kTh'
 
@@ -374,7 +357,6 @@ alias lm='ll |more'        #  Pipe through 'more'
 alias lr='ll -R'           #  Recursive ls.
 alias la='ll -A'           #  Show hidden files.
 alias tree='tree -Csuh'    #  Nice alternative to 'recursive ls' ...
-
 
 #-------------------------------------------------------------
 # Tailoring 'less'
@@ -397,7 +379,6 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-
 #-------------------------------------------------------------
 # Spelling typos - highly personnal and keyboard-dependent :-)
 #-------------------------------------------------------------
@@ -407,7 +388,6 @@ alias vf='cd'
 alias moer='more'
 alias moew='more'
 alias kk='ll'
-
 
 #-------------------------------------------------------------
 # A few fun ones
@@ -423,7 +403,6 @@ function xtitle()
     *)  ;;
     esac
 }
-
 
 # Aliases that use xtitle
 alias top='xtitle Processes on $HOST && top'
@@ -461,7 +440,6 @@ function xpdf() { command xpdf "$@" & }
 # File & strings related functions:
 #-------------------------------------------------------------
 
-
 # Find a file with a pattern in name:
 function ff() { find . -type f -iname '*'"$*"'*' -ls ; }
 
@@ -493,7 +471,6 @@ Usage: fstr [-i] \"pattern\" [\"filename pattern\"] "
 xargs -0 egrep --color=always -sn ${case} "$1" 2>&- | more
 
 }
-
 
 function swap()
 { # Swap 2 filenames around, if they exist (from Uzi's bashrc).
@@ -530,7 +507,6 @@ function extract()      # Handy Extract Program
     fi
 }
 
-
 # Creates an archive (*.tar.gz) from given directory.
 function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 
@@ -544,10 +520,8 @@ function sanitize() { chmod -R u=rwX,g=rX,o= "$@" ;}
 # Process/system related functions:
 #-------------------------------------------------------------
 
-
 function my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
 function pp() { my_ps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
-
 
 function killps()   # kill by process name
 {
@@ -591,7 +565,6 @@ function mydf()         # Pretty-print of 'df' output.
     done
 }
 
-
 function my_ip() # Get IP adress on ethernet.
 {
     MY_IP=$(/sbin/ifconfig eth0 | awk '/inet/ { print $2 } ' |
@@ -627,7 +600,6 @@ function repeat()       # Repeat n times command.
     done
 }
 
-
 function ask()          # See 'killps' for example of use.
 {
     echo -n "$@" '[y/n] ' ; read ans
@@ -643,8 +615,6 @@ function corename()   # Get name of app that created a corefile.
         echo -n $file : ; gdb --core=$file --batch | head -1
     done
 }
-
-
 
 #=========================================================================
 #
@@ -693,7 +663,6 @@ complete -f -o default -X '*.+(bz2|BZ2)'  bzip2
 complete -f -o default -X '!*.+(bz2|BZ2)' bunzip2
 complete -f -o default -X '!*.+(zip|ZIP|z|Z|gz|GZ|bz2|BZ2)' extract
 
-
 # Documents - Postscript,pdf,dvi.....
 complete -f -o default -X '!*.+(ps|PS)'  gs ghostview ps2pdf ps2ascii
 complete -f -o default -X \
@@ -720,10 +689,7 @@ complete -f -o default -X '!*.@(mp?(e)g|MP?(E)G|wma|avi|AVI|\
 asf|vob|VOB|bin|dat|vcd|ps|pes|fli|viv|rm|ram|yuv|mov|MOV|qt|\
 QT|wmv|mp3|MP3|ogg|OGG|ogm|OGM|mp4|MP4|wav|WAV|asx|ASX)' xine
 
-
-
 complete -f -o default -X '!*.pl'  perl perl5
-
 
 #  This is a 'universal' completion function - it works when commands have
 #+ a so-called 'long options' mode , ie: 'ls --all' instead of 'ls -a'
@@ -734,7 +700,6 @@ complete -f -o default -X '!*.pl'  perl perl5
 #+ (this will allow completions like 'ls --color=auto' to work correctly).
 
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
-
 
 _get_longopts()
 {
@@ -915,8 +880,3 @@ complete -F _killall killall killps
 # mode:shell-script
 # sh-shell:bash
 # End:
-
-# Launch Zsh
-if [ -t 1 ]; then
-    exec zsh
-fi

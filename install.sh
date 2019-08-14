@@ -3,23 +3,30 @@
 #
 # Installs the dotfiles and backs up old profile settings.
 #
-# These dotfiles assumes vim, zsh, and git are installed.
-# Also, installs Vundle.vim. A :PluginInstall is required from within Vim.
+# These dotfiles checks that vim, zsh, and git are installed.
 #
 # To add files or directories to the dotfile, simply copy them to the dotfiles
 # folder.
 #
-# $ cp <file> ~/dotfiles
-# $ cp <directory> ~/dotfiles
+# $ cp <directory/file> ~/dotfiles
 #
+# **Possibly dump mintytc?**
 # On Windows, all links are symbolic links except gitconfig and minttyrc. 
 # Windows complains unless these are hard links.
+# TODO: Functions!
+
+# Pre-reqs
+# vim, zsh, git, {?}..
+hash vim 2>/dev/null || { echo >&2 "Please install Vim.  Aborting."; exit 1; }
+hash zsh 2>/dev/null || { echo >&2 "Please install Zsh.  Aborting."; exit 1; }
+hash git 2>/dev/null || { echo >&2 "Please install Git.  Aborting."; exit 1; }
 
 # Variables
 dir=~/dotfiles
 current=`pwd -P`
 olddir=~/.old
 os=`uname -o`
+
 # Font formats
 udl=$'\e[4m'
 bld=$'\e[1m'
@@ -47,10 +54,12 @@ then
     mkdir -p $olddir
 fi
 
-# Build items array for installation.
+# Build array of directories/files for installation.
 files=(* .[^.]*)
+
 # Items we don't want to symlink.
 remove=(README.md install.sh .gitignore .git)
+
 for item in "${remove[@]}"
 do
     for file in "${!files[@]}"
@@ -88,9 +97,6 @@ do
     if [ -a ~/.${file} ] && cmp -s ~/.${file} ${file}
     then
         install="Same as new"
-    elif [ $os == "Cygwin" ] && ( [ ${file} == "minttyrc" ] || [ ${file} == "gitconfig" ] ); then
-        install="Installed"
-        ln $dir/${file} ~/.${file}
     else
         install="Installed"
         ln -s $dir/${file} ~/.${file}
@@ -106,17 +112,7 @@ do
     printf "${lnformat}" ".${file}" "${type}" "${backup}" "${install}"
 done
 
-# Post install/Vundle
-if [ -a ~/dotfiles/vim/bundle/Vundle.vim ]; then
-    printf "\n${header}\n" "Vundle.vim detected: " "Skipping"
-else
-    printf "\nInstall Vundle.vim? [y/n]: "
-    read vundleanswer
-    if [ $vundleanswer == y ]; then
-        git clone https://github.com/VundleVim/Vundle.vim ~/dotfiles/vim/bundle/Vundle.vim
-        printf "\nYou must run vim and type :PluginInstall\n\n"
-    else
-        exit
-    fi
-fi
+# Post install
+vim -c ':PlugInstall | quit'
+
 unset files remove
