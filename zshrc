@@ -20,5 +20,5 @@ source ~/.zsh/completion.zsh
 source ~/.zsh/promptvi.zsh
 source ~/.zsh/prompt.zsh
 source ~/.zsh/title.zsh
-source ~/.zsh/bindings.zsh
+source ~/.zsh/key-bindings.zsh
 source ~/.zsh/functions.zsh

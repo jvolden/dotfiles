@@ -880,3 +880,4 @@ complete -F _killall killall killps
 # mode:shell-script
 # sh-shell:bash
 # End:
+bash -c zsh

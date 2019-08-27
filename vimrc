@@ -14,7 +14,6 @@ set autoindent       "" Keep previous line indent
 set smartindent      "" Indent blocks automaticly
 set mouse=a        "" Enable mouse all modes
 set noswapfile
-set background=dark
 set scrolloff=5
 set showcmd          "" Show commands as they are typed
 set colorcolumn=100
@@ -26,11 +25,6 @@ set completeopt =longest,menuone
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
-
-"" Set to 256 colors. (Fixes solarized terminal colors.)
-if !has('gui_running')
-  set t_Co=256
-endif
 
 "" Keybindings
 let mapleader = ","
@@ -54,7 +48,14 @@ Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 call plug#end()
 
+"" Set all color settings here. Order matters.
+"" Try a default one first.
 silent! colorscheme evening
+"" Set to 256 colors. (Fixes solarized terminal colors.)
+if !has('gui_running')
+  set t_Co=256
+endif
+set background=dark
 silent! colorscheme solarized
 
 let g:lightline = {
@@ -126,18 +127,18 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade',     'green', 'none',   'green', '#151515')
-call NERDTreeHighlightFile('ini',     'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('md',        'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml',     'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('config',  'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('conf',    'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('json',    'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('html',    'yellow', 'none',  'yellow', '#151515')
-call NERDTreeHighlightFile('styl',      'cyan', 'none',    'cyan', '#151515')
-call NERDTreeHighlightFile('css',       'cyan', 'none',    'cyan', '#151515')
-call NERDTreeHighlightFile('coffee',     'Red', 'none',     'red', '#151515')
-call NERDTreeHighlightFile('js',         'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('jade',   'green',   'none', 'green',   '#151515')
+call NERDTreeHighlightFile('ini',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('coffee', 'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 
 "" Reload .vimrc when saved
