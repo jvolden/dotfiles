@@ -1,11 +1,11 @@
 [core]
-	autocrlf = false
-	editor = vim
-	fileMode = false
+  autocrlf = false
+  editor = vim
+  fileMode = false
 [user]
-	name = Jon Volden
-	email = volden.jon@gmail.com
+  name = Jon Volden
+  email = volden.jon@gmail.com
 [push]
-	default = simple
+  default = simple
 [merge]
-	conflictstyle = diff3
+  conflictstyle = diff3
