@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 export EDITOR=vim
+export SHELL=/bin/zsh
 setopt appendhistory autocd extendedglob nomatch notify globdots
 unsetopt beep
 
@@ -13,6 +14,9 @@ zstyle :compinstall filename '~/.zshrc'
 eval `dircolors ~/.dir_colors`
 
 alias ls="ls -AF --color"
+alias tmuxattach="tmux -S /tmp/jonjeffs attach -t jonjeff"
+alias tmuxcreate="tmux -S /tmp/jonjeffs new-session -s jonjeff"
+alias tmuxls="tmux -S /tmp/jonjeffs ls"
 
 setopt prompt_subst
 
