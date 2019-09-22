@@ -1,5 +1,6 @@
 syntax on
 filetype plugin indent on
+set showtabline=2
 set nocompatible     "" Set incompatible with vi
 set softtabstop=2  "" Treat tabs like n spaces
 set expandtab        "" Expand tabs into spaces
@@ -114,12 +115,13 @@ function! MyFilename()
 endfunction
 
 "" NERDTree Settings.
-map <C-n> :NERDTreeToggle<CR>
+noremap <Leader>f :NERDTreeToggle<CR>
+noremap <silent> <Leader>v :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd VimEnter * NERDTree
 
 "" NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
