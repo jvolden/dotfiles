@@ -18,7 +18,6 @@ set noswapfile
 set scrolloff=5
 set showcmd          "" Show commands as they are typed
 set colorcolumn=100
-set laststatus=2
 set updatetime=250   "" ms to wait before writes
 set noshowmode       "" Disable default mode state
 set infercase
@@ -34,11 +33,9 @@ nmap t o<ESC>k
 nmap T O<ESC>j
 
 call plug#begin('~/.vim/plugged')
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'itchyny/lightline.vim'
-"" Plug 'itchyny/calendar.vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
@@ -48,72 +45,8 @@ Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
+Plug 'chriskempson/base16-vim'
 call plug#end()
-
-"" Set all color settings here. Order matters.
-"" Try a default one first.
-silent! colorscheme evening
-"" Set to 256 colors. (Fixes solarized terminal colors.)
-if !has('gui_running')
-  set t_Co=256
-endif
-set background=dark
-silent! colorscheme solarized
-
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename', 'charvaluehex' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'component': {
-      \   'charvaluehex': '0x%B'
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-      \ }
-
-function! MyModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! MyReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "\ue0a2"
-  else
-    return ""
-  endif
-endfunction
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? "\ue0a0 "._ : ''
-  endif
-  return ''
-endfunction
-
-function! MyFilename()
-  return (''  != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
 
 "" NERDTree Settings.
 noremap <Leader>f :NERDTreeToggle<CR>
@@ -161,17 +94,18 @@ augroup omni_complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup END
 
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
-"" Cursor settings
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+"" base16colorschemes
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+if filereadable(expand("~/.lightlinerc"))
+  source ~/.lightlinerc
+endif
