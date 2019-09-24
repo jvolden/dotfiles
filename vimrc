@@ -2,10 +2,10 @@ syntax on
 filetype plugin indent on
 set showtabline=2
 set nocompatible     "" Set incompatible with vi
-set softtabstop=2  "" Treat tabs like n spaces
+set softtabstop=2    "" Treat tabs like n spaces
 set expandtab        "" Expand tabs into spaces
-set shiftwidth=2   "" Spaces that < and > shift
-set tabstop=2      "" Number of spaces for tabs
+set shiftwidth=2     "" Spaces that < and > shift
+set tabstop=2        "" Number of spaces for tabs
 set smarttab
 set number           "" Line numbers
 set ignorecase
@@ -13,13 +13,13 @@ set smartcase
 set magic
 set autoindent       "" Keep previous line indent
 set smartindent      "" Indent blocks automaticly
-set mouse=a        "" Enable mouse all modes
+set mouse=a          "" Enable mouse all modes
 set noswapfile
 set scrolloff=5
 set showcmd          "" Show commands as they are typed
 set colorcolumn=100
 set laststatus=2
-set updatetime=250 "" ms to wait before writes
+set updatetime=250   "" ms to wait before writes
 set noshowmode       "" Disable default mode state
 set infercase
 set completeopt =longest,menuone
@@ -35,10 +35,9 @@ nmap T O<ESC>j
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
-Plug 'VundleVim/Vundle.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
-Plug 'itchyny/calendar.vim'
+"" Plug 'itchyny/calendar.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-sensible'
@@ -47,6 +46,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
+Plug 'vim-syntastic/syntastic'
+Plug 'ervandew/supertab'
 call plug#end()
 
 "" Set all color settings here. Order matters.
@@ -165,3 +166,12 @@ let g:calendar_google_task = 1
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
+
+"" Cursor settings
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
