@@ -21,10 +21,6 @@ set colorcolumn=100
 set updatetime=250   "" ms to wait before writes
 set noshowmode       "" Disable default mode state
 set infercase
-set completeopt =longest,menuone
-set omnifunc=syntaxcomplete#Complete
-set completefunc=syntaxcomplete#Complete
-set complete=.,w,b,u,U,t,i,d
 
 "" Keybindings
 let mapleader = ","
@@ -54,7 +50,6 @@ noremap <Leader>f :NERDTreeToggle<CR>
 noremap <silent> <Leader>v :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTree
 
