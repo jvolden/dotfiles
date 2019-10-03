@@ -46,6 +46,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
+Plug 'kien/ctrlp.vim'
 call plug#end()
 
 "" NERDTree Settings.
@@ -99,6 +100,9 @@ nmap ga <Plug>(EasyAlign)
 
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
+
+"" Syntastic settings
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 
 "" base16colorschemes
 if filereadable(expand("~/.vimrc_background"))
