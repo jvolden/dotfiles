@@ -43,6 +43,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 "" NERDTree Settings.
