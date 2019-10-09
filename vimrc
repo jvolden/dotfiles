@@ -20,13 +20,12 @@ set showcmd          "" Show commands as they are typed
 set colorcolumn=100
 set updatetime=250   "" ms to wait before writes
 set noshowmode       "" Disable default mode state
-set infercase
 
 "" Keybindings
 let mapleader = ","
 inoremap jj <Esc>
-nmap t o<ESC>k
-nmap T O<ESC>j
+nmap t o<ESC>k       "" Blank line after current line
+nmap T O<ESC>j       "" Blank line before current line
 
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
@@ -47,14 +46,20 @@ call plug#end()
 "" NERDTree Settings.
 noremap <Leader>f :NERDTreeToggle<CR>
 noremap <silent> <Leader>v :NERDTreeFind<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && 
+        \ !exists("s:std_in") | exe 'NERDTree' argv()[0] |
+        \ wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && 
+        \ b:NERDTree.isTabTree()) | q | endif
+let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI=1
+let NERDTreeMinimalMenu=1
 
 "" NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg
+          \ .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
@@ -76,17 +81,6 @@ call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 augroup vimrchooks
   au!
   autocmd BufWritePost .vimrc source ~/.vimrc
-augroup END
-
-augroup omni_complete
-  " clear commands before resetting
-  autocmd!
-  " Enable omnicomplete for supported filetypes
-  autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup END
 
 xmap ga <Plug>(EasyAlign)
