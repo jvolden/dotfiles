@@ -43,11 +43,12 @@ Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'benmills/vimux'
 call plug#end()
 
 "" NERDTree Settings.
-noremap <Leader>f :NERDTreeToggle<CR>
-noremap <silent> <Leader>v :NERDTreeFind<CR>
+noremap <Leader>nn :NERDTreeToggle<CR>
+noremap <silent> <Leader>nf :NERDTreeFind<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && 
         \ !exists("s:std_in") | exe 'NERDTree' argv()[0] |
@@ -85,8 +86,13 @@ augroup vimrchooks
   autocmd BufWritePost .vimrc source ~/.vimrc
 augroup END
 
+"" EasyAlign keybindings
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+"" vimux keybindings
+map <Leader>vm :call VimuxRunCommand("make clean; make")<CR>
+map <Leader>vc :call VimuxPromptCommand()<CR>
 
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
