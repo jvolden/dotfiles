@@ -42,7 +42,6 @@ Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'benmills/vimux'
 call plug#end()
 
@@ -56,8 +55,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && 
         \ b:NERDTree.isTabTree()) | q | endif
 let NERDTreeQuitOnOpen=1
-let NERDTreeMinimalUI=1
-let NERDTreeMinimalMenu=1
+let NERDTreeMinimalUI=0
+let NERDTreeMinimalMenu=0
 
 "" NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
