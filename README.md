@@ -53,3 +53,14 @@ _(Not required, but the status lines will look incorrect.)_
 - [x] Update install.sh to backup old files ~~incrementally~~ if needed.
 - [ ] Add git status line to bash. Change bashrc completely?
 - [ ] Update README.md to explain included dotfiles/folders.
+
+### Submodule commands:
+
+```bash
+# Add
+> git submodule add https://github.com/user/repo.git
+# Install
+> git submodule update --init --recursive
+# Update
+> git submodule update --init --remote
+```
