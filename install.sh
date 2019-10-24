@@ -112,7 +112,7 @@ do
     printf "${lnformat}" ".${file}" "${type}" "${backup}" "${install}"
 done
 
-# Post install
-vim -c ':PlugInstall | quit'
+git submodule update --init --recursive
+vim -c ':PlugInstall'
 
 unset files remove
