@@ -106,6 +106,6 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-if filereadable(expand("~/.lightlinerc"))
-  source ~/.lightlinerc
+if filereadable(expand("~/.vim/lightlinerc"))
+  source ~/.vim/lightlinerc
 endif
