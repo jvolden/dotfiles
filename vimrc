@@ -50,6 +50,7 @@ Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'benmills/vimux'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 "" NERDTree Settings.
