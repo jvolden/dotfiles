@@ -95,6 +95,7 @@ map <Leader>vc :call VimuxPromptCommand()<CR>
 
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
+autocmd FileType c,cpp,hpp,sh autocmd BufWritePre <buffer> %s/\s\+$//e
 
 "" Syntastic settings
 let g:syntastic_cpp_compiler_options = '-std=c++11'

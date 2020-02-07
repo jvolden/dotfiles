@@ -14,8 +14,8 @@ zstyle :compinstall filename '~/.zshrc'
 eval `dircolors ~/.dir_colors`
 
 alias ls="ls -AF --color"
-alias tmuxattach="tmux -S /tmp/jonjeffs attach -t jonjeff"
-alias tmuxcreate="tmux -S /tmp/jonjeffs new-session -s jonjeff"
+alias tmuxattach="tmux -2 -S /tmp/jonjeffs attach -t jonjeff"
+alias tmuxcreate="tmux -2 -S /tmp/jonjeffs new-session -s jonjeff"
 alias tmuxls="tmux -S /tmp/jonjeffs ls"
 
 setopt prompt_subst
