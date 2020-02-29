@@ -12,6 +12,13 @@ My dotfiles that I use on Windows/WSL and Linux. Should work with any bash/zsh s
 7. vimrc/vim folder: My current settings file with the following Vundle plugins
 
 ```vimrc
+" Install vim-plug and plugins if vim-plug is not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -24,10 +31,9 @@ Plug 'mattn/emmet-vim'
 ```
 
 8. zshrc/zsh folder: My current settings for zsh. 
-    * agnosters theme: https://gist.github.com/3712874
+    * Switched to liquidprompt
     * vim_prompt
     * Lots of laggy horrible plugins turned on that I can't live without.
-    * Git prompt
 
 __TLDR: Generally these dotfiles will:__
 * Set term and vim themes to solarized. 
@@ -53,6 +59,7 @@ _(Not required, but the status lines will look incorrect.)_
 - [x] Update install.sh to backup old files ~~incrementally~~ if needed.
 - [ ] Add git status line to bash. Change bashrc completely?
 - [ ] Update README.md to explain included dotfiles/folders.
+- [ ] Add base16 themes.
 
 ### Submodule commands:
 

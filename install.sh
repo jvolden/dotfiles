@@ -58,7 +58,7 @@ fi
 files=(* .[^.]*)
 
 # Items we don't want to symlink.
-remove=(README.md install.sh .gitignore .git)
+remove=(README.md install.sh .gitignore .gitmodules .git)
 
 for item in "${remove[@]}"
 do
@@ -112,7 +112,8 @@ do
     printf "${lnformat}" ".${file}" "${type}" "${backup}" "${install}"
 done
 
-# Post install
-vim -c ':PlugInstall | quit'
+git submodule update --init --recursive
+
+vim -c ':PlugInstall'
 
 unset files remove
