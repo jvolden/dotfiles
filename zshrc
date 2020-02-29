@@ -15,11 +15,13 @@ eval `dircolors ~/.dir_colors`
 
 alias ls="ls -AF --color"
 alias dir="dir --color"
-alias tm5a="tmux -2 attach -t 560"
-alias tm5c="tmux -2 new-session -s 560"
-alias tmuxattach="tmux -2 -S /tmp/jonjeffs attach -t jonjeff"
-alias tmuxcreate="tmux -2 -S /tmp/jonjeffs new-session -s jonjeff"
-alias tmuxls="tmux -S /tmp/jonjeffs ls"
+alias tm560a="tmux -2 attach -t 560"
+alias tm560c="tmux -2 new-session -s 560"
+alias tm647a="tmux -2 attach -t 647"
+alias tm647c="tmux -2 new-session -s 647"
+alias tm678a="tmux -2 attach -t 678"
+alias tm678c="tmux -2 new-session -s 678"
+alias tmuxls="tmux ls"
 
 setopt prompt_subst
 
