@@ -20,6 +20,8 @@ alias tmuxls="tmux -S /tmp/jonjeffs ls"
 
 setopt prompt_subst
 
+. ~/.bin/z/z.sh
+
 source ~/.zsh/completion.zsh
 source ~/.zsh/promptvi.zsh
 #source ~/.zsh/prompt.zsh

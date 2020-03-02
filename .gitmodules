@@ -1,3 +1,6 @@
 [submodule "zsh/liquidprompt"]
 	path = zsh/liquidprompt
 	url = https://github.com/nojhan/liquidprompt.git
+[submodule "bin/z"]
+	path = bin/z
+	url = https://github.com/rupa/z
