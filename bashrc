@@ -212,7 +212,7 @@ fi
 # Test user type:
 if [[ ${USER} == "root" ]]; then
     SU=${Red}           # User is root.
-elif [[ ${USER} != $(logname) ]]; then
+elif [[ ${USER} != ${LOGNAME} ]]; then
     SU=${BRed}          # User is not login user.
 else
     SU=${BCyan}         # User is normal (well ... most of us are).
