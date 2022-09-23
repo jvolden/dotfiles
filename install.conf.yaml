@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.dircolors: dircolors
+    ~/.vimrc: vimrc
+    ~/.vim: vim
+    ~/.config/fish: fish
+    ~/.config/ranger: ranger
+
+- create:
+  - ~/.config
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [fisher update, Updating fisher plugins]
